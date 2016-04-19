@@ -1,0 +1,27 @@
+﻿@model Taxi.Models.Shifts
+@{
+    ViewBag.Title = "ViewShifts";
+    Layout = "~/Views/Shared/_LayoutForDispetcher.cshtml";
+}
+
+<div class="content-wrapper">
+<table class="table table-hover ">
+    <thead>
+    <tr>
+        <th id="table-head">Водій</th>
+        <th id="table-head">Авто</th>
+        <th id="table-head">Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var i in ViewBag.Shifts)
+    {
+        <tr>
+            <td>@i.Drivers.Employees.CallSign</td>
+            <td>@i.Cars.NumberPlate</td>
+            <td>@i.Date.ToShortDateString()</td>
+        </tr>
+    }
+    </tbody>
+</table>
+    </div>

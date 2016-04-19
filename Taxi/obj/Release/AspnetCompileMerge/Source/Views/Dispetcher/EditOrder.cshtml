@@ -1,0 +1,48 @@
+﻿@using Taxi.Models
+@model Order
+@{
+    ViewBag.Title = "EditOrder";
+    Layout = "~/Views/Shared/_LayoutForDispetcher.cshtml";
+}
+<div class="content-wrapper">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <ol>
+            <li class="editMap">
+                @Html.Label("Адреса звідки")
+                @Html.TextBoxFor(m => m.AdressFrom)
+            </li>
+            <li class="editMap">
+                @Html.Label("Адреса куди")
+                @Html.TextBoxFor(m => m.AdressWhere)
+            </li>
+            <li class="editMap">
+                @Html.Label("Телефон клієнта")
+                @Html.TextBoxFor(m => m.ClientsPhone)
+            </li>
+            <li class="editMap">
+                @Html.Label("Тариф")
+                @Html.DropDownListFor(m => m.IdTariff, new SelectList(new List<Tariffs>(@ViewBag.ASD), "Id", "Type"))
+            </li>
+            <li class="editMap">
+                @Html.Label("Водій")
+                @Html.TextBoxFor(m => m.Drivers.Employees.CallSign, new {id = "driver", @readonly = "readonly"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Дистанція (метрів)")
+                @Html.TextBoxFor(m => m.Kilometrage, new {@readonly = "readonly"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Опис")
+                @Html.TextAreaFor(m => m.Description)
+            </li>
+            <li class="editMap">
+                @Html.Label("Статус")
+                @Html.DropDownListFor(m => m.IdStatus, new SelectList(new List<Statuses>(@ViewBag.Statuses), "Id", "Name"))
+            </li>
+        </ol>
+        <input class="btn btn-success" style="margin-bottom: 20px; margin-left: 40px;" type="submit" value="Submit"/>
+    }
+</div>

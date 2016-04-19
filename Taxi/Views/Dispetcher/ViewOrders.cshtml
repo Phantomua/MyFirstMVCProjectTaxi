@@ -1,0 +1,43 @@
+﻿@model Taxi.Models.Order
+@{
+    ViewBag.Title = "ViewOrders";
+    Layout = "~/Views/Shared/_LayoutForDispetcher.cshtml";
+}
+<style type="text/css" ></style>
+<section class="content-wrapper"></section>
+<table class="table table-hover ">
+    <thead>
+    <tr>
+        <th id="table-head">Статус</th>
+        <th id="table-head">Адреса звідки</th>
+        <th id="table-head">Адреса куди</th>
+        <th id="table-head">Дата</th>
+        <th id="table-head">Телефон клієнта</th>
+        <th id="table-head">Водій</th>
+        <th id="table-head">Кілометраж</th>
+        <th id="table-head">Тариф</th>
+        <th id="table-head">Ціна</th>
+        <th id="table-head">Диспетчер</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var i in ViewBag.Order)
+    {
+        <tr>
+            <td>@i.Statuses.Name</td>
+            <td>@i.AdressFrom</td>
+            <td>@i.AdressWhere</td>
+            <td>@i.DateTime</td>
+            <td>@i.ClientsPhone</td>
+            <td>@i.Drivers.Employees.CallSign</td>
+            <td>@i.Kilometrage</td>
+            <td>@i.Tariffs.Type</td>
+            <td>@i.Cost</td>
+            <td>@i.Dispetchers.Employees.CallSign</td>
+            <td>@i.Description</td>
+            <td><a class="button"  href="/Dispetcher/EditOrder?id=@i.Id"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+        </tr>
+    }
+    </tbody>
+</table>

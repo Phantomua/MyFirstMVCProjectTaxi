@@ -1,0 +1,94 @@
+﻿@model Taxi.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutForDispetcher.cshtml";
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#drvLabel").hide();
+        $("#drv").hide();
+        $("#role").on("input", function() {
+            if ($(this).val() == 'Водій'){
+                $("#drv").show();
+                $("#drvLabel").show();
+            }
+            else {
+                $("#drv").hide();
+                $("#drvLabel").hide();
+            }
+        });
+    });
+</script>
+<div class="content-wrapper">
+    <hgroup class="title">
+        <h2>Створення новго працівника.</h2>
+    </hgroup>
+
+    @using (FormExtensions.BeginForm(Html))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <fieldset>
+            <legend>Форма регистрации</legend>
+            <ol class="Add-emp-list-left">
+                <li class="editMap">
+                    @Html.Label("Позивний")
+                    @Html.TextBoxFor(m => m.CallSign, new {@class = "form-control"})
+                </li>
+
+                <li class="editMap">
+                    @Html.Label("Ім'я")
+                    @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("По батькові")
+                    @Html.TextBoxFor(m => m.MiddleName, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("Адреса")
+                    @Html.TextBoxFor(m => m.Adress, new {@class = "form-control"})
+                </li>
+
+                <li class="editMap">
+                    @Html.Label("Стать")
+                    @Html.TextBoxFor(m => m.Sex, new {@class = "form-control"})
+                </li>
+
+                <li class="editMap">
+                    @Html.Label("Роль")
+                    @Html.TextBoxFor(m => m.Role, new {@class = "form-control", id = "role"})
+                </li>
+            </ol>
+            <ol class="add-emp-list-right">
+                <li class="editMap">
+                    @Html.Label("Пароль")
+                    @Html.TextBoxFor(m => m.Password, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("Підтвердження паролю")
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("Прізвище")
+                    @Html.TextBoxFor(m => m.LastName, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("Телефон")
+                    @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("Дата народження")
+                    @Html.TextBoxFor(m => m.DateOfBorn, new {@class = "form-control"})
+                </li>
+                <li class="editMap">
+                    @Html.Label("Посвідчення водія", new {id="drvLabel"})
+                    @Html.TextBoxFor(m => m.DriverLicenseId, new {@class = "form-control", id = "drv"})
+                </li>
+            </ol>
+
+        </fieldset>
+        <input class="btn btn-success" style="margin-bottom: 20px;" type="submit" value="Реєстрація"/>
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿@using Taxi.Models
+@model Taxi.Models.Shifts
+@{
+    ViewBag.Title = "NewShift";
+    Layout = "~/Views/Shared/_LayoutForDispetcher.cshtml";
+}
+
+<div class="content-wrapper">
+    <hgroup class="title">
+        <h2>Створення нової зміни.</h2>
+    </hgroup>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <ol>
+            <li class="editMap">
+                @Html.Label("Водій")
+                @Html.DropDownListFor(m => m.IdDriver, new SelectList(new List<string>(@ViewBag.Drivers)))
+            </li>
+            <li class="editMap">
+                @Html.Label("Номерний знак авто")
+                @Html.DropDownListFor(m => m.IdCar, new  SelectList(new List<Cars>(@ViewBag.Cars), "Id", "NumberPlate"))
+            </li>
+        </ol>
+        <input class="btn btn-success" style="margin-bottom: 20px;" type="submit" value="Підтвердити"/>
+    }
+</div>

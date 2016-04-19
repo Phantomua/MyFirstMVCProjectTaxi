@@ -1,0 +1,37 @@
+﻿@model Taxi.Models.LoginModel
+
+@{
+    ViewBag.Title = "Выполнить вход";
+}
+
+<div class="content-wrapper">
+<hgroup class="title">
+</hgroup>
+<section id="loginForm">
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Форма входа</legend>
+        <ol>
+            <li>
+                @Html.Label("Позивний")
+                @Html.TextBoxFor(m => m.CallSign)
+                @Html.ValidationMessageFor(m => m.CallSign)
+            </li>
+            <li>
+                @Html.Label("Пароль")
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+        </ol>
+        <input type="submit" class="btn btn-default" style="margin-bottom: 20px;" value="Виконати вхід" />
+    </fieldset>
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    </div>

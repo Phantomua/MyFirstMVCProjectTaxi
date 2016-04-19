@@ -1,0 +1,760 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище TaxiDBModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Хранилище TaxiDBModelContainer">
+          <EntitySet Name="Administators" EntityType="Хранилище TaxiDBModel.Administators" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cars" EntityType="Хранилище TaxiDBModel.Cars" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Dispetchers" EntityType="Хранилище TaxiDBModel.Dispetchers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Drivers" EntityType="Хранилище TaxiDBModel.Drivers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employees" EntityType="Хранилище TaxiDBModel.Employees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="Хранилище TaxiDBModel.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RoleTable" EntityType="Хранилище TaxiDBModel.RoleTable" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shifts" EntityType="Хранилище TaxiDBModel.Shifts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Statuses" EntityType="Хранилище TaxiDBModel.Statuses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tariffs" EntityType="Хранилище TaxiDBModel.Tariffs" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Administators_Employees" Association="Хранилище TaxiDBModel.FK_Administators_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Administators" EntitySet="Administators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispetchers_Employees" Association="Хранилище TaxiDBModel.FK_Dispetchers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Dispetchers" EntitySet="Dispetchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Employees" Association="Хранилище TaxiDBModel.FK_Drivers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Roles" Association="Хранилище TaxiDBModel.FK_Employees_Roles">
+            <End Role="RoleTable" EntitySet="RoleTable" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Dispetchers" Association="Хранилище TaxiDBModel.FK_Order_Dispetchers">
+            <End Role="Dispetchers" EntitySet="Dispetchers" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Drivers" Association="Хранилище TaxiDBModel.FK_Order_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Statuses" Association="Хранилище TaxiDBModel.FK_Order_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Tariffs" Association="Хранилище TaxiDBModel.FK_Order_Tariffs">
+            <End Role="Tariffs" EntitySet="Tariffs" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shifts_Cars" Association="Хранилище TaxiDBModel.FK_Shifts_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Shifts" EntitySet="Shifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shifts_Drivers" Association="Хранилище TaxiDBModel.FK_Shifts_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Shifts" EntitySet="Shifts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administators">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdEmployee" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NumberPlate" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="BodyNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Kilometrage" Type="decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="DateOfLastTS" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dispetchers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdEmployee" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DriverLicenseId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateOfHiring" Type="date" Nullable="false" />
+          <Property Name="IdEmployee" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Busy" Type="bit" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="CallSign" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfBorn" Type="date" />
+          <Property Name="DateOfHiring" Type="date" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IdRole" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientsPhone" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="AdressFrom" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="AdressWhere" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Kilometrage" Type="int" Nullable="false" />
+          <Property Name="IdDriver" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdDispetcher" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdTariff" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdStatus" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Cost" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <EntityType Name="RoleTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Shifts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdDriver" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdCar" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tariffs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Cost" Type="decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="InitialCost" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Administators_Employees">
+          <End Role="Employees" Type="Хранилище TaxiDBModel.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Administators" Type="Хранилище TaxiDBModel.Administators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administators">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispetchers_Employees">
+          <End Role="Employees" Type="Хранилище TaxiDBModel.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Dispetchers" Type="Хранилище TaxiDBModel.Dispetchers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dispetchers">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Employees">
+          <End Role="Employees" Type="Хранилище TaxiDBModel.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drivers" Type="Хранилище TaxiDBModel.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Roles">
+          <End Role="RoleTable" Type="Хранилище TaxiDBModel.RoleTable" Multiplicity="1" />
+          <End Role="Employees" Type="Хранилище TaxiDBModel.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Dispetchers">
+          <End Role="Dispetchers" Type="Хранилище TaxiDBModel.Dispetchers" Multiplicity="1" />
+          <End Role="Order" Type="Хранилище TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispetchers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdDispetcher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Drivers">
+          <End Role="Drivers" Type="Хранилище TaxiDBModel.Drivers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Хранилище TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Statuses">
+          <End Role="Statuses" Type="Хранилище TaxiDBModel.Statuses" Multiplicity="1" />
+          <End Role="Order" Type="Хранилище TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Tariffs">
+          <End Role="Tariffs" Type="Хранилище TaxiDBModel.Tariffs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Хранилище TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariffs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdTariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shifts_Cars">
+          <End Role="Cars" Type="Хранилище TaxiDBModel.Cars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shifts" Type="Хранилище TaxiDBModel.Shifts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shifts">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shifts_Drivers">
+          <End Role="Drivers" Type="Хранилище TaxiDBModel.Drivers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shifts" Type="Хранилище TaxiDBModel.Shifts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shifts">
+              <PropertyRef Name="IdDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaxiDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TaxiDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="TaxiDBModel.Cars" />
+          <EntitySet Name="Dispetchers" EntityType="TaxiDBModel.Dispetchers" />
+          <EntitySet Name="Drivers" EntityType="TaxiDBModel.Drivers" />
+          <EntitySet Name="Employees" EntityType="TaxiDBModel.Employees" />
+          <EntitySet Name="Order" EntityType="TaxiDBModel.Order" />
+          <EntitySet Name="RoleTable" EntityType="TaxiDBModel.RoleTable" />
+          <EntitySet Name="Shifts" EntityType="TaxiDBModel.Shifts" />
+          <EntitySet Name="Tariffs" EntityType="TaxiDBModel.Tariffs" />
+          <AssociationSet Name="FK_Shifts_Cars" Association="TaxiDBModel.FK_Shifts_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Shifts" EntitySet="Shifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispetchers_Employees" Association="TaxiDBModel.FK_Dispetchers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Dispetchers" EntitySet="Dispetchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Dispetchers" Association="TaxiDBModel.FK_Order_Dispetchers">
+            <End Role="Dispetchers" EntitySet="Dispetchers" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Employees" Association="TaxiDBModel.FK_Drivers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Drivers" Association="TaxiDBModel.FK_Order_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shifts_Drivers" Association="TaxiDBModel.FK_Shifts_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Shifts" EntitySet="Shifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Roles" Association="TaxiDBModel.FK_Employees_Roles">
+            <End Role="RoleTable" EntitySet="RoleTable" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Tariffs" Association="TaxiDBModel.FK_Order_Tariffs">
+            <End Role="Tariffs" EntitySet="Tariffs" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <EntitySet Name="Statuses" EntityType="TaxiDBModel.Statuses" />
+          <AssociationSet Name="FK_Order_Statuses" Association="TaxiDBModel.FK_Order_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <EntitySet Name="Administators" EntityType="TaxiDBModel.Administators" />
+          <AssociationSet Name="FK_Administators_Employees" Association="TaxiDBModel.FK_Administators_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Administators" EntitySet="Administators" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NumberPlate" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="BodyNumber" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Kilometrage" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="DateOfLastTS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Shifts" Relationship="TaxiDBModel.FK_Shifts_Cars" FromRole="Cars" ToRole="Shifts" />
+        </EntityType>
+        <EntityType Name="Dispetchers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="IdEmployee" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="TaxiDBModel.FK_Dispetchers_Employees" FromRole="Dispetchers" ToRole="Employees" />
+          <NavigationProperty Name="Order" Relationship="TaxiDBModel.FK_Order_Dispetchers" FromRole="Dispetchers" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DriverLicenseId" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateOfHiring" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdEmployee" Type="Guid" Nullable="false" />
+          <Property Name="Busy" Type="Boolean" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Employees" Relationship="TaxiDBModel.FK_Drivers_Employees" FromRole="Drivers" ToRole="Employees" />
+          <NavigationProperty Name="Order" Relationship="TaxiDBModel.FK_Order_Drivers" FromRole="Drivers" ToRole="Order" />
+          <NavigationProperty Name="Shifts" Relationship="TaxiDBModel.FK_Shifts_Drivers" FromRole="Drivers" ToRole="Shifts" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CallSign" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateOfBorn" Type="DateTime" Precision="0" />
+          <Property Name="DateOfHiring" Type="DateTime" Precision="0" />
+          <Property Name="Sex" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IdRole" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Dispetchers" Relationship="TaxiDBModel.FK_Dispetchers_Employees" FromRole="Employees" ToRole="Dispetchers" />
+          <NavigationProperty Name="Drivers" Relationship="TaxiDBModel.FK_Drivers_Employees" FromRole="Employees" ToRole="Drivers" />
+          <NavigationProperty Name="RoleTable" Relationship="TaxiDBModel.FK_Employees_Roles" FromRole="Employees" ToRole="RoleTable" />
+          <NavigationProperty Name="Administators" Relationship="TaxiDBModel.FK_Administators_Employees" FromRole="Employees" ToRole="Administators" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientsPhone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="AdressFrom" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="AdressWhere" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Kilometrage" Type="Int32" Nullable="false" />
+          <Property Name="IdDriver" Type="Guid" Nullable="false" />
+          <Property Name="IdDispetcher" Type="Guid" Nullable="false" />
+          <Property Name="IdTariff" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Dispetchers" Relationship="TaxiDBModel.FK_Order_Dispetchers" FromRole="Order" ToRole="Dispetchers" />
+          <NavigationProperty Name="Drivers" Relationship="TaxiDBModel.FK_Order_Drivers" FromRole="Order" ToRole="Drivers" />
+          <NavigationProperty Name="Tariffs" Relationship="TaxiDBModel.FK_Order_Tariffs" FromRole="Order" ToRole="Tariffs" />
+          <Property Type="Int32" Name="Cost" />
+          <Property Type="String" Name="Description" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="IdStatus" Nullable="false" />
+          <NavigationProperty Name="Statuses" Relationship="TaxiDBModel.FK_Order_Statuses" FromRole="Order" ToRole="Statuses" />
+        </EntityType>
+        <EntityType Name="RoleTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Employees" Relationship="TaxiDBModel.FK_Employees_Roles" FromRole="RoleTable" ToRole="Employees" />
+          <Property Type="String" Name="DisplayName" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Shifts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="IdDriver" Type="Guid" Nullable="false" />
+          <Property Name="IdCar" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cars" Relationship="TaxiDBModel.FK_Shifts_Cars" FromRole="Shifts" ToRole="Cars" />
+          <NavigationProperty Name="Drivers" Relationship="TaxiDBModel.FK_Shifts_Drivers" FromRole="Shifts" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Tariffs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="InitialCost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="TaxiDBModel.FK_Order_Tariffs" FromRole="Tariffs" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Shifts_Cars">
+          <End Role="Cars" Type="TaxiDBModel.Cars" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shifts" Type="TaxiDBModel.Shifts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shifts">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispetchers_Employees">
+          <End Role="Employees" Type="TaxiDBModel.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Dispetchers" Type="TaxiDBModel.Dispetchers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dispetchers">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Dispetchers">
+          <End Role="Dispetchers" Type="TaxiDBModel.Dispetchers" Multiplicity="1" />
+          <End Role="Order" Type="TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispetchers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdDispetcher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Employees">
+          <End Role="Employees" Type="TaxiDBModel.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drivers" Type="TaxiDBModel.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Drivers">
+          <End Role="Drivers" Type="TaxiDBModel.Drivers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shifts_Drivers">
+          <End Role="Drivers" Type="TaxiDBModel.Drivers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shifts" Type="TaxiDBModel.Shifts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shifts">
+              <PropertyRef Name="IdDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Roles">
+          <End Role="RoleTable" Type="TaxiDBModel.RoleTable" Multiplicity="1" />
+          <End Role="Employees" Type="TaxiDBModel.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Tariffs">
+          <End Role="Tariffs" Type="TaxiDBModel.Tariffs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="TaxiDBModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariffs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdTariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="TaxiDBModel.FK_Order_Statuses" FromRole="Statuses" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Order_Statuses">
+          <End Type="TaxiDBModel.Statuses" Role="Statuses" Multiplicity="1" />
+          <End Type="TaxiDBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Administators">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="IdEmployee" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="TaxiDBModel.FK_Administators_Employees" FromRole="Administators" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK_Administators_Employees">
+          <End Type="TaxiDBModel.Employees" Role="Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaxiDBModel.Administators" Role="Administators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administators">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TaxiDBModelContainer" CdmEntityContainer="TaxiDBEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="TaxiDBModel.Cars">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="NumberPlate" ColumnName="NumberPlate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BodyNumber" ColumnName="BodyNumber" />
+                <ScalarProperty Name="Kilometrage" ColumnName="Kilometrage" />
+                <ScalarProperty Name="DateOfLastTS" ColumnName="DateOfLastTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispetchers">
+            <EntityTypeMapping TypeName="TaxiDBModel.Dispetchers">
+              <MappingFragment StoreEntitySet="Dispetchers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="TaxiDBModel.Drivers">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DriverLicenseId" ColumnName="DriverLicenseId" />
+                <ScalarProperty Name="DateOfHiring" ColumnName="DateOfHiring" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Busy" ColumnName="Busy" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TaxiDBModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="CallSign" ColumnName="CallSign" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DateOfBorn" ColumnName="DateOfBorn" />
+                <ScalarProperty Name="DateOfHiring" ColumnName="DateOfHiring" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="TaxiDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="ClientsPhone" ColumnName="ClientsPhone" />
+                <ScalarProperty Name="AdressFrom" ColumnName="AdressFrom" />
+                <ScalarProperty Name="AdressWhere" ColumnName="AdressWhere" />
+                <ScalarProperty Name="Kilometrage" ColumnName="Kilometrage" />
+                <ScalarProperty Name="IdDriver" ColumnName="IdDriver" />
+                <ScalarProperty Name="IdDispetcher" ColumnName="IdDispetcher" />
+                <ScalarProperty Name="IdTariff" ColumnName="IdTariff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleTable">
+            <EntityTypeMapping TypeName="TaxiDBModel.RoleTable">
+              <MappingFragment StoreEntitySet="RoleTable">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="TaxiDBModel.Shifts">
+              <MappingFragment StoreEntitySet="Shifts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdDriver" ColumnName="IdDriver" />
+                <ScalarProperty Name="IdCar" ColumnName="IdCar" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tariffs">
+            <EntityTypeMapping TypeName="TaxiDBModel.Tariffs">
+              <MappingFragment StoreEntitySet="Tariffs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InitialCost" ColumnName="InitialCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="TaxiDBModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administators">
+            <EntityTypeMapping TypeName="TaxiDBModel.Administators">
+              <MappingFragment StoreEntitySet="Administators">
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

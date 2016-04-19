@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "MainAdminView";
+    Layout = "~/Views/Shared/_LayoutForAdministrator.cshtml";
+}
+
+<div class="content-wrapper" style="margin: 20px auto;">
+    @Html.ActionLink("Додати машину", "AddCar", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Список машин", "ViewCars", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Видалити машину", "DeleteCar", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+</div>

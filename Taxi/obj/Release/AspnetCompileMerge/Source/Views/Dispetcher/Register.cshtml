@@ -1,0 +1,43 @@
+﻿@model Taxi.Models.RegisterModel
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<div class="content-wrapper">
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Создание новой учетной записи.</h2>
+</hgroup>
+
+@using (FormExtensions.BeginForm(Html)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Форма регистрации</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.CallSign)
+                @Html.TextBoxFor(m => m.CallSign)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Role)
+                @Html.PasswordFor(m => m.Role)
+            </li>
+        </ol>
+        <input type="submit" value="Регистрация" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    </div>

@@ -1,0 +1,44 @@
+﻿@model Taxi.Models.Cars
+@{
+    ViewBag.Title = "AddCar";
+    Layout = "~/Views/Shared/_LayoutForAdministrator.cshtml";
+}
+
+<div class="content-wrapper">
+    <hgroup class="title">
+        <h2>Додання нового авто.</h2>
+    </hgroup>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <ol>
+            <li class="editMap">
+                @Html.Label("Тип авто")
+                @Html.TextBoxFor(m=>m.Type)
+            </li>
+            <li class="editMap">
+                @Html.Label("Номерний знак")
+                @Html.TextBoxFor(m => m.NumberPlate)
+            </li>
+            <li class="editMap">
+                @Html.Label("Номер кузова")
+                @Html.TextBoxFor(m => m.BodyNumber)
+            </li>
+            <li class="editMap">
+                @Html.Label("Кілометраж")
+                @Html.TextBoxFor(m => m.Kilometrage)
+            </li>
+            <li class="editMap">
+                @Html.Label("Опис")
+                @Html.TextBoxFor(m => m.Description)
+            </li>
+            <li class="editMap">
+                @Html.Label("Дата останього ТО")
+                @Html.TextBoxFor(m=>m.DateOfLastTS)
+            </li>
+        </ol>
+        <input class="btn btn-success" style="margin-bottom:  20px; margin-left: 40px;" type="submit" value="Підтвердити"/>
+    }
+</div>

@@ -1,0 +1,12 @@
+﻿@if (Request.IsAuthenticated) {
+    <text>
+         @Html.Label("Привіт, "+User.Identity.Name+"!", new {@class = "btn btn-warning"})
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "btn btn-warning"}))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()" style="text-decoration: none">Вийти</a>
+        }
+    </text>
+} else {
+        @Html.ActionLink("Вхід", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",@class = "btn btn-warning login" })
+}

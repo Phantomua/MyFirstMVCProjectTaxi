@@ -1,0 +1,64 @@
+﻿@using Taxi.Models
+@model Order
+@{
+    ViewBag.Title = "Order";
+    Layout = "../Shared/_LayoutForDispetcher.cshtml";
+}
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+<script src="~/Scripts/Map/MapEngine.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<body>
+<section class="content-wrapper-order">
+    <script type="text/javascript">
+        $("#start").bind("changed", function() {
+            initialize("start");
+        });
+        $("#end").bind("changed", function() {
+            initialize("end");
+        });
+    </script>
+    <div style="float: left; margin-top: 20px;">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <ol>
+            <li class="editMap">
+                @Html.Label("Адреса звідки")
+                @Html.TextBoxFor(m => m.AdressFrom, new {@class="form-control", id = "start"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Адреса куди")
+                @Html.TextBoxFor(m => m.AdressWhere, new {@class="form-control",id = "end"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Телефон клієнта")
+                @Html.TextBoxFor(m => m.ClientsPhone, new {@class="form-control"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Тариф")
+                @Html.DropDownListFor(m => m.IdTariff, new SelectList(new List<Tariffs>(@ViewBag.ASD), "Id", "Type"))
+            </li>
+            <li class="editMap">
+                @Html.Label("Водій")
+                @Html.TextBoxFor(m => m.IdDriver, new {@class="form-control", id = "driver", @readonly = "readonly"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Дистанція маршруту (метрів)")
+                @Html.TextBoxFor(m => m.Kilometrage, new {@class="form-control", @readonly = "readonly"})
+            </li>
+            <li class="editMap">
+                @Html.Label("Опис")
+                @Html.TextBoxFor(m => m.Description, new {@class="form-control"})
+            </li>
+        </ol>
+        <input class="btn btn-success" style="margin-left: 40px;" type="submit" value="Підтвердити"/>
+    }
+        </div>
+    <div id="map-canvas"></div>
+    <div id="warnings_panel" style="width: 100%; height: 10%; text-align: center"></div>
+</section>
+</body>

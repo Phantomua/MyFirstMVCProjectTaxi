@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutForDispetcher.cshtml";  
+}
+
+<div class="content-wrapper" style="margin: 20px auto;">
+
+    @Html.ActionLink("Створити замовлення", "Order", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Переглянути замовлення", "ViewOrders", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Додати нового працівника", "AddEmployee", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Додати зміну", "NewShift",routeValues: null, htmlAttributes: new{ @class="btn btn-default"})
+    @Html.ActionLink("Переглянути зміни", "ViewShifts",routeValues: null, htmlAttributes: new{ @class="btn btn-default"})
+    @Html.ActionLink("Додати нове авто", "AddCar",routeValues: null, htmlAttributes: new{ @class="btn btn-default"})
+    @Html.ActionLink("Переглянути всі авто", "ViewCars",routeValues: null, htmlAttributes: new{ @class="btn btn-default"})
+</div>
